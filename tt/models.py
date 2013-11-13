@@ -7,6 +7,6 @@ class Test(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __unicode__(self):
-        retrn self.question_text
+        return self.att1
 
     
