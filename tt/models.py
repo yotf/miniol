@@ -16,4 +16,16 @@ class Student(models.Model):
             max_length=255
             )
     is_active = models.BooleanField(default=True)
+    ime = models.CharField(max_length=200)
+    prezime = models.CharField(max_length=200)
+
+class Aktivnost(models.Model):
+    ime = models.CharField(max_length=200,unique=True)
+    is_active = models.BooleanField(default=True)
+    
+class ZavrseneAktivnosti(models.Model):
+    student = models.ForeignKey(Student)
+    activities = models.ManyToManyField(Aktivnost,blank=True)
+
+
     
