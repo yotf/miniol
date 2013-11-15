@@ -17,12 +17,11 @@ class Student(models.Model):
         
 class Module(models.Model):
     title = models.CharField(max_length=200,unique=True)
-
     def __unicode__(self):
         return self.title
 
 class Aktivnost(models.Model):
-    module = models.ForeignKey(Module)
+    module_id = models.ForeignKey(Module)
     title = models.CharField(max_length=200,unique=True)
     is_active = models.BooleanField(default=True)
     def __unicode__(self):
