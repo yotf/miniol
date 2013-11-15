@@ -21,16 +21,16 @@ class Module(models.Model):
         return self.title
 
 class Aktivnost(models.Model):
-    module_id = models.ForeignKey(Module)
+    module = models.ForeignKey(Module)
     title = models.CharField(max_length=200,unique=True)
     is_active = models.BooleanField(default=True)
+    url = models.CharField(max_length=200,unique=True)
     def __unicode__(self):
-        return self.ime
+        return self.title
 
     
 class ZavrseneAktivnosti(models.Model):
     student = models.ForeignKey(Student)
     activities = models.ManyToManyField(Aktivnost,blank=True)
-
 
     

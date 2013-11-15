@@ -3,18 +3,37 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Document</title>
+        <style type="text/css">
+          .moduleTitle {
+              background-color: #b1cfe7;
+              margin-top:2px;
+              padding: 5px;
+          }
+          .moduleTitle:hover {
+              background-color: #599DB3;
+              cursor: pointer;
+              
+          }
+          a {
+             display:block;
+          }
+        </style>
     </head>
+
     <body>
       <div id="sidebar">
         {% for module in module_list %}
         <div class="moduleTitle">
-          <h6>{{ module.title }}</h6>
-          {% for activity in module_list.aktivnost_set %}
-          <div class="activityTitle">
-            <h7>{{activity.title}}</h7>
+          <h5>{{ module.title }}</h5>
           </div>
-            {% endfor %}
+          <div class="moduleDetails">
+            
+          {% for activity in module.aktivnost_set.all %}
+              <a class="moduleActivity" href="{% url 'tt:activity' activity.url %}">{{activity.title}}</a>
+          {% endfor %}
+
           </div>
+
         </div>
         {% endfor %}
 
