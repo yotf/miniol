@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+    </head>
+    <body>
+      <div id="sidebar">
+        {% for module in module_list %}
+        <div class="moduleTitle">
+          <h6>module.title</h6>
+          <div class="activityTitle">
+            
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </body>
+</html>
