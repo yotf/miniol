@@ -6,7 +6,7 @@
     </head>
     <body>
       <div id="sidebar">
-
+        {% for module in module_list %}
         <div class="moduleTitle">
           <h6>{{ module.title }}</h6>
           <h6>{{ module_list }}</h6>
@@ -14,6 +14,7 @@
             
           </div>
         </div>
+        {% endfor %}
 
       </div>
     </body>
