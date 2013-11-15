@@ -22,6 +22,10 @@ class Student(models.Model):
 class Aktivnost(models.Model):
     ime = models.CharField(max_length=200,unique=True)
     is_active = models.BooleanField(default=True)
+
+class Module(models.Model):
+    title = models.CharField(max_length=200,unique=True)
+    
     
 class ZavrseneAktivnosti(models.Model):
     student = models.ForeignKey(Student)
