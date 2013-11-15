@@ -9,9 +9,11 @@
         {% for module in module_list %}
         <div class="moduleTitle">
           <h6>{{ module.title }}</h6>
-          <h6>{{ module_list }}</h6>
+          {% for activity in module_list.aktivnost_set %}
           <div class="activityTitle">
-            
+            <h7>{{activity.title}}</h7>
+          </div>
+            {% endfor %}
           </div>
         </div>
         {% endfor %}
