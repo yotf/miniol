@@ -18,14 +18,19 @@ class Student(models.Model):
     is_active = models.BooleanField(default=True)
     ime = models.CharField(max_length=200)
     prezime = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.user
 
 class Aktivnost(models.Model):
     ime = models.CharField(max_length=200,unique=True)
     is_active = models.BooleanField(default=True)
+    def __unicode__(self):
+        return self.ime
 
 class Module(models.Model):
     title = models.CharField(max_length=200,unique=True)
-    
+    def __unicode__(self):
+        return self.title
     
 class ZavrseneAktivnosti(models.Model):
     student = models.ForeignKey(Student)
