@@ -8,7 +8,10 @@ from django.core.urlresolvers import reverse
 def index(request):
     module_list = Module.objects.all()
     #module_list = [module.aktivnost_set.all() for module in module_list]
-    completed_activity_list = get_object_or_404(ZavrseneAktivnosti,student=request.user.id).activity.all()
+    try:
+        completed_activity_list = get_object_or_404(ZavrseneAktivnosti,student=request.user.id).activity.all()
+    except:
+        completed_activity_list = []
     progress = float(len(completed_activity_list))/float(len(Aktivnost.objects.all()))
     try:
         updates = get_list_or_404(Updates)[:5]
