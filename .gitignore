@@ -1,4 +1,7 @@
 venv
 *.pyc
 staticfiles
-hellodjango/settings.py
+settings.py
+db.sqlite3
+*.swp
+

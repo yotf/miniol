@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from tt.models import Aktivnost,ZavrseneAktivnosti,Student,Module
+from tt.models import Aktivnost,ZavrseneAktivnosti,Student,Module,Updates
 
 admin.site.register(Student)
 #admin.site.register(Aktivnost)
 admin.site.register(ZavrseneAktivnosti)
-#admin.site.register(Module)
+admin.site.register(Updates)
 
 class AktivnostInline(admin.TabularInline):
     model = Aktivnost

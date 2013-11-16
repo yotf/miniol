@@ -14,6 +14,9 @@ class Student(models.Model):
     prezime = models.CharField(max_length=200)
     def __unicode__(self):
         return self.user
+
+
+        
         
 class Module(models.Model):
     title = models.CharField(max_length=200,unique=True)
@@ -30,7 +33,12 @@ class Aktivnost(models.Model):
 
     
 class ZavrseneAktivnosti(models.Model):
-    student = models.ForeignKey(Student)
-    activities = models.ManyToManyField(Aktivnost,blank=True)
+    student = models.ForeignKey(User)
+    activity = models.ManyToManyField(Aktivnost,blank=True)
+
+class Updates(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    
 
     
