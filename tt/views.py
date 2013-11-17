@@ -3,6 +3,7 @@ from tt.models import Module,Aktivnost,ZavrseneAktivnosti,Updates,Comment
 from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth import logout
 
 
 def index(request):
@@ -55,6 +56,10 @@ def user_login(request):
     else:
         return HttpResponse("Bad login!")
 
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('tt:index'))
+    
 
 def add_comment(request):
     user_id = request.user

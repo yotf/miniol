@@ -10,4 +10,5 @@ urlpatterns = patterns('',
                        url(r'^(?P<url>\w+)/$',views.activity,name='activity'),
                        url(r'^submit$',views.submit, name='submit'),
                        url(r'^comments_add$',views.add_comment,name="comments_add"),
+                       url(r'^user_logout$',views.user_logout,name="user_logout"),
                        )

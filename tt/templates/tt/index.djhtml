@@ -16,6 +16,7 @@
         'thickness':".1",
         'angleOffset':-100,
         'displayPrevious':true,
+        'readOnly':true,
         });
 
         $({value: 0}).animate({value: {{ progress}} * 100}, {
@@ -86,6 +87,10 @@
           -moz-box-sizing: border-box;
           box-sizing: border-box;
           }
+          input[type=text],input[type=submit]{
+             display:block;
+          
+          }
           
         </style>
     </head>
@@ -124,8 +129,21 @@
              <p>You haven't completed any activity!</p>
              {%endif %}
              
+             <form action="{% url 'tt:user_logout' %}" method="post">
+               {% csrf_token %}
+               <input type="submit" name="" value="logout"/>
+             </form>
+             
           {% else %}
              <p>Welcome, new user. Please log in.</p>
+             <form action="{% url 'tt:user_login' %}" method="post">
+               {% csrf_token %}
+               <input type="text" name="username" value=""/>
+               <input type="password" name="password" value=""/>
+               <input type="submit" name="" value="login"/>
+
+             </form>
+
           {% endif %}
         </div>
       <div id="main">
