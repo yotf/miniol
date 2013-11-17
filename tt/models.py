@@ -39,6 +39,12 @@ class ZavrseneAktivnosti(models.Model):
 class Updates(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
+
+class Comment(models.Model):
+    user = models.ForeignKey(User)
+    content = models.TextField()
+    date = models.DateTimeField()
+    
     
 
     

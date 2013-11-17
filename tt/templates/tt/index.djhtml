@@ -32,6 +32,9 @@
         <meta charset="UTF-8"/>
         <title>Document</title>
         <style type="text/css">
+          body {
+              background: url({% static 'tt/images/combine_images.jpg' %});
+          }
           .moduleTitle {
               background-color: #b1cfe7;
               margin-top:2px;
@@ -47,17 +50,41 @@
           }
           #sidebar {
              float:left;
-             width: 100px;
+             width: 150px;
+             background-color: white;
           }
           div#studentInfo {
              float:right;
              border: 1px solid #333;
              padding: 10px;
+             background-color: white;
                   
           }
           div#main{
-              margin: 0 150px;
-              padding: 100px;
+              margin: 0 250px;
+              height: 200px;
+              padding : 30px;
+              background-color:white;
+          }
+
+          .comment-container {
+              border-bottom: 1px solid white;
+              border-top: 1px solid #f5f7fa;
+              background-color: #edeff2;
+              padding: 6px;
+              font-family: 'Open Sans','lucida grande',tahoma,verdana,arial,sans-serif;
+              clear:both;
+          }
+          .comment-placeholder {
+          color: #888;
+          font-size: 12px;
+          padding: 4px;
+          height: 30px;
+          margin: 0;
+          width: 100%;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
           }
           
         </style>
@@ -85,12 +112,17 @@
           {% if user.is_authenticated %}
              <p>Welcome, {{ user.name }} {{ user.username }}. Thanks
              for logging in.</p>
+             {% if completed_activity_list %}
              <p> You have completed: </p>
+             
              {% for act in completed_activity_list %} 
              <p>{{act}} </p>
              <input type="text" name="" value="" class="dial"
                      data-min="0" data-max="100"/>
              {% endfor %}
+             {% else %}
+             <p>You haven't completed any activity!</p>
+             {%endif %}
              
           {% else %}
              <p>Welcome, new user. Please log in.</p>
@@ -100,6 +132,36 @@
         {% for update in updates %}
         <p>{{update.content}}</p>
         {% endfor %}
+      <div id="communityFooter">
+        <div id="community-heading-container">
+          <a  name="comments"></a>
+          <div class="comments">
+            <div class="comment-container">
+              <form action="{% url 'tt:comments_add' %}"
+                    method="post">
+                {% csrf_token %}
+              <div class="comment-placeholder-container">
+                <textarea class="comment-placeholder" name="comment">Write a comment...</textarea>
+              </div>
+              <input type="submit" name="submit-button" value="post"/>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="child-comments">
+          {% for comment in comments %}
+          <div class="comment-container">
+            <p>{{comment.user}}</p>
+            <p>{{comment.content}}</p>
+          </div>
+          {% endfor %}
+
+        </div>
+          <div id="newComment">
+            </textarea>
+            </div>
+           
+      </div>
       </div>
     </body>
 </html>
