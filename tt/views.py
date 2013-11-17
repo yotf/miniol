@@ -31,7 +31,7 @@ def index(request):
 def activity(request,url):
     activity = get_object_or_404(Aktivnost,url=url)
 
-    return render(request,'tt/%s.djhtml' % url,{'activity':activity,'form':ActivityCompletedForm()})
+    return render(request,'tt/%s.djhtml' % url,{'activity':activity})
 
 def submit(request):
     form = ActivityCompletedForm(request.POST)
