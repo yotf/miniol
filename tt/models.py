@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+import os
+
+
 
 class Student(models.Model):
     user = models.OneToOneField(User)
@@ -16,12 +19,14 @@ class Student(models.Model):
         return self.user
 
 
+
         
         
 class Module(models.Model):
     title = models.CharField(max_length=200,unique=True)
     def __unicode__(self):
         return self.title
+
 
 class Aktivnost(models.Model):
     module = models.ForeignKey(Module)
@@ -30,7 +35,6 @@ class Aktivnost(models.Model):
     url = models.CharField(max_length=200,unique=True)
     def __unicode__(self):
         return self.title
-
     
 class ZavrseneAktivnosti(models.Model):
     student = models.ForeignKey(User)

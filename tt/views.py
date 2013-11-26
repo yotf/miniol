@@ -1,22 +1,28 @@
 from django.shortcuts import render,redirect, get_object_or_404,get_list_or_404
 from tt.models import Module,Aktivnost,ZavrseneAktivnosti,Updates,Comment
 from django import forms
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 
 
 def index(request):
+    # da li ovde moze nesto da se desi???
+    # treba da proverim da li je user
+    # authenticated request.user.is_authenticated()
+    if request.method!= 'GET':
+        raise Http404()
     module_list = Module.objects.all()
-    #module_list = [module.aktivnost_set.all() for module in module_list]
-    try:
-        completed_activity_list = get_object_or_404(ZavrseneAktivnosti,student=request.user.id).activity.all()
-    except:
+    if not request.user.is_authenticated():
         completed_activity_list = []
+    else:
+        student = request.user.id
+        zavrsenaAktivnost = get_object_or_404(ZavrseneAktivnosti,student=student)
+        completed_activity_list = zavrsenaAktivnost.activity.all()
     progress = float(len(completed_activity_list))/float(len(Aktivnost.objects.all())) if len(Aktivnost.objects.all())!=0 else 0 
     try:
         updates = get_list_or_404(Updates)[:5]
-    except:
+    except Http404:
         updates = ["No updates yet"]
 
     comments = Comment.objects.all()
@@ -26,7 +32,6 @@ def index(request):
                 'updates':updates,
                 'comments':comments}
     
-    
     return render(request,'tt/index.djhtml',context)
 
 def activity(request,url):
@@ -34,18 +39,25 @@ def activity(request,url):
 
     return render(request,'tt/%s.djhtml' % url,{'activity':activity})
 
-def submit(request):
-    form = ActivityCompletedForm(request.POST)
-    if form.is_valid():
-        activity_id = form.cleaned_data['activity_id']
-        za = ZavrseneAktivnosti(student=1,activity=activity_id)
-        za.save()
 
 from django.contrib.auth import authenticate,login
 from django.utils import timezone
+
 def user_login(request):
-    username = request.POST['username']
-    password = request.POST['password']
+    if request.method!='POST':
+        # Ako nije post metoda
+        return HttpResponse(reverse('tt:index'))
+    try:
+        #Ovde u principu ne bi trebalo
+        #da ikada dodje, posto ce svejedno
+        #onaj token napraviti problem ako
+        # nije sa nase stranice,a ako je
+        # sa nase onda mozemo osigurati
+        username = request.POST['username']
+        password = request.POST['password']
+    except KeyError:
+        return HttpResponseRedirect(reverse('tt:index'))
+        
     user = authenticate(username=username,password=password)
     if user is not None:
         if user.is_active:
@@ -62,11 +74,13 @@ def user_logout(request):
     
 
 def add_comment(request):
-    user_id = request.user
-    content = request.POST['comment']
-    date = timezone.now()
-    comment = Comment(user=user_id,content=content,date=date)
-    comment.save()
+    user = request.user
+    if user.is_authenticated():
+        content = request.POST['comment']
+        date = timezone.now()
+        comment = Comment(user=user,content=content,date=date)
+        comment.save()
+        
     return HttpResponseRedirect(reverse('tt:index'))
     
 def redirect_login(request):

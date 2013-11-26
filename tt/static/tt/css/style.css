@@ -1,0 +1,83 @@
+body {
+    background: url('../images/combine_images.jpg');
+}
+.moduleTitle {
+    background-color: #b1cfe7;
+    margin-top:2px;
+    padding: 5px;
+}
+.moduleTitle:hover {
+    background-color: #599DB3;
+    cursor: pointer;
+    
+}
+a {
+    display:block;
+}
+
+p {
+    color:#505050;
+    font-size: 1em;
+    font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;
+    margin-left: 100px;
+}
+h1,h2,h3{
+    color: #BD8100;
+    font-family: Baskerville, "Palatino Linotype", Times, serif;
+    padding-top: 7px;
+    padding-left: 100px;
+
+
+}
+#sidebar {
+    float:left;
+    width: 150px;
+    background-color: white;
+}
+div#studentInfo {
+    float:right;
+    border: 1px solid #333;
+    padding: 10px;
+    background-color: white;
+    
+}
+div#main{
+    margin: 0 250px;
+    height: 200px;
+    padding : 30px;
+    background-color:white;
+}
+
+.comment-container {
+    border-bottom: 1px solid white;
+    border-top: 1px solid #f5f7fa;
+    background-color: #edeff2;
+    padding: 6px;
+    font-family: 'Open Sans','lucida grande',tahoma,verdana,arial,sans-serif;
+    clear:both;
+}
+.comment-placeholder {
+    color: #888;
+    font-size: 12px;
+    padding: 4px;
+    height: 30px;
+    margin: 0;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+input[type=text],input[type=submit]{
+    display:block;
+    
+}
+
+/* div.comments > div:first-child, div.comments > div > div { */
+/*     border-bottom: 1px solid white; */
+/*     border-top: 1px solid #f5f7fa; */
+/*     background-color: #edeff2; */
+/*     padding: 6px; */
+/*     font-family: 'Open Sans','lucida grande',tahoma,verdana,arial,sans-serif; */
+/*     clear:both; */
+/* } */
+
