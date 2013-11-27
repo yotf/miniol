@@ -32,7 +32,7 @@
       </script>
 
         <meta charset="UTF-8"/>
-        <title>Programski prevodioci -  dobrodosli</title>
+        <title>Programski prevodioci</title>
 
         <link href="{% static "tt/css/style.css" %}"
           rel="stylesheet"/>
@@ -82,15 +82,19 @@
              <p>Welcome, new user. Please log in.</p>
              <form action="{% url 'tt:user_login' %}" method="post">
                {% csrf_token %}
-               <input type="text" name="username" value=""/>
-               <input type="password" name="password" value=""/>
-               <input type="submit" name="" value="login"/>
+               <input type="text" name="username" placeholder="Unesite
+                                                               vase korisnicko
+                                                               ime..." value=""/>
+               <input type="password" name="password"
+                      placeholder="Unesite vasu lozinku..." value=""/>
+               <input type="submit" name="login-submit" value="login"/>
 
              </form>
 
           {% endif %}
         </div>
       <div id="main">
+        <h1>Programski prevodioci</h1>
         {% for update in updates %}
         <h3>{{update.title}}</h3>
         <p>{{update.content}}</p>
@@ -104,9 +108,9 @@
                     method="post">
                 {% csrf_token %}
               <div class="comment-placeholder-container">
-                <textarea class="comment-placeholder" name="comment">Write a comment...</textarea>
+                <textarea class="comment-placeholder" placeholder="Write a comment..." name="comment"></textarea>
               </div>
-              <input type="submit" name="submit-button" value="post"/>
+              <input type="submit" name="comment-submit" value="post"/>
               </form>
             </div>
           </div>

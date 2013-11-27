@@ -5,10 +5,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'hellodjango.views.home', name='home'),
+    url(r'^', include('tt.urls',namespace="tt")),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^tt/',include('tt.urls',namespace="tt")),
+    # url(r'^tt/',include('tt.urls',namespace="tt")),
                         
 
     

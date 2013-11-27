@@ -13,13 +13,13 @@ def index(request):
     if request.method!= 'GET':
         raise Http404()
     module_list = Module.objects.all()
-    if not request.user.is_authenticated():
-        completed_activity_list = []
-    else:
-        student = request.user.id
-        zavrsenaAktivnost = get_object_or_404(ZavrseneAktivnosti,student=student)
-        completed_activity_list = zavrsenaAktivnost.activity.all()
-    progress = float(len(completed_activity_list))/float(len(Aktivnost.objects.all())) if len(Aktivnost.objects.all())!=0 else 0 
+    # if not request.user.is_authenticated():
+    #     completed_activity_list = []
+    # else:
+    #     student = request.user.id
+    #     zavrsenaAktivnost = get_object_or_404(ZavrseneAktivnosti,student=student)
+    #     completed_activity_list = zavrsenaAktivnost.activity.all()
+    # progress = float(len(completed_activity_list))/float(len(Aktivnost.objects.all())) if len(Aktivnost.objects.all())!=0 else 0 
     try:
         updates = get_list_or_404(Updates)[:5]
     except Http404:
@@ -27,8 +27,8 @@ def index(request):
 
     comments = Comment.objects.all()
     context = {'module_list':module_list,
-               'completed_activity_list':completed_activity_list,
-                'progress':progress,
+               # 'completed_activity_list':completed_activity_list,
+               #  'progress':progress,
                 'updates':updates,
                 'comments':comments}
     
