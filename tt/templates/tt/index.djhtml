@@ -8,27 +8,26 @@
       <script src="{% static 'tt/js/jquery.knob.js' %}"></script>
 
       <script>
-        $(function() {
-        $(".dial").knob({
+  $(function() {
+    $(".dial").knob({
+      'width':"150",
+      'fgColor':"#333",
+      'skin':"tron",
+      'thickness':".1",
+      'angleOffset':-100,
+      'displayPrevious':true,
+      'readOnly':true,
+    });
 
-        'width':"150",
-        'fgColor':"#333",
-        'skin':"tron",
-        'thickness':".1",
-        'angleOffset':-100,
-        'displayPrevious':true,
-        'readOnly':true,
-        });
-
-        $({value: 0}).animate({value: {{ progress}} * 100}, {
-        duration: 1000,
-        easing:'swing',
-        step: function() 
-        {
+    $({value: 0}).animate({value: {{ progress}} * 100}, {
+      duration: 1000,
+      easing:'swing',
+      step: function() {
         $('.dial').val(Math.ceil(this.value)).trigger('change');
-        }
-})
-        });
+      }});
+  });
+
+
       </script>
 
         <meta charset="UTF-8"/>
@@ -115,7 +114,7 @@
             </div>
           </div>
         <div class="child-comments">
-          {% for comment in comments %}
+          {% for comment in comments reversed %}
           <div class="comment-container">
             <p>{{comment.user}}</p>
             <p>{{comment.content}}</p>

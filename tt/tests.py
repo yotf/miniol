@@ -10,6 +10,7 @@ import time
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from django.template.loader import render_to_string
 
 class HomePageTest(TestCase):
     def test_tt_url_resolvers_to_index_view(self):
@@ -20,10 +21,11 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         request.method = 'GET'
         response = index(request)
-        try:
-            self.assertTrue(response.content.strip().startswith(b'<html>'))
-        except:
-            self.assertTrue(response.content.strip().startswith(b'<!doctype'))
+        expected_html = render_to_string('index.djhtml')
+        # convert response.content bytes to python unicode string
+        self.assertEqual(response.content.decode(),expected_html)
+        
+       
         self.assertIn(b'<title>Programski prevodioci</title>',response.content)
         self.assertTrue(response.content.strip().endswith(b'</html>'))
         
@@ -83,7 +85,7 @@ class NewVisitorTest(TestCase):
         comment_input_box.send_keys("Dobar dan svima!")
         self.browser.find_element_by_css_selector("input[name=comment-submit]").click()
         time.sleep(3)
-        comment = self.browser.find_element_by_css_selector("div.comment-container:last-child p:nth-of-type(2)")
+        comment = self.browser.find_element_by_css_selector("div.comment-container:first-child p:nth-of-type(2)")
 
         self.assertEqual("Dobar dan svima!",comment.text)
         
